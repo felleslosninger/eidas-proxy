@@ -41,7 +41,7 @@
 
 	<!-- Configuration for response assertion signature with RSA and Metadata-signing -->
 	<entry key="2.keyStoreType">PKCS11</entry>
-	<entry key="2.keyStoreProvider">com.safenetinc.luna.provider.LunaProvider</entry>
+<!--	<entry key="2.keyStoreProvider">SunPKCS11</entry>-->
 	<entry key="2.keyStorePassword">KEYSTORE_PASSWORD</entry> <!--HSM PIN-->
 	<entry key="2.keyAlias">HSM_ALIAS</entry>
 

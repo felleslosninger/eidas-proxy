@@ -1,0 +1,29 @@
+
+name: Build Dockerfile on branch with version latest
+
+on:
+  push:
+    branches:
+      - "ID-4500-v2"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: eidas-proxy
+      DOCKLE_HOST: "unix:///var/run/docker.sock"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the tagged Docker image
+        run: docker build --tag ${{ secrets.REGISTRY_URL }}/${{ env.IMAGE_NAME}}:latest --file docker/Dockerfile --build-arg GIT_PACKAGE_TOKEN=${{secrets.GITHUB_TOKEN}} .
+      - name: Login to ACR
+        uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # pin@v3.1.0
+        with:
+          registry: ${{ secrets.REGISTRY_URL }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: "Push image"
+        run: docker push ${{ secrets.REGISTRY_URL }}/${{ env.IMAGE_NAME}}:latest
+
+
+

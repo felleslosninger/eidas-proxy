@@ -88,4 +88,6 @@ RUN mkdir -p ${CATALINA_HOME}/eidas/logs && chmod 774 ${CATALINA_HOME}/eidas/log
 
 EXPOSE 8080
 
+ENV CLASSPATH="/var/usrlocal/luna/jsp/LunaProvider.jar:$CLASSPATH"
+
 CMD ["/bin/bash", "-c", "./bin/addEnvironmentSpesificConfigFiles.sh;./bin/updateKeyStoreConfig.sh;catalina.sh run"]
