@@ -44,7 +44,6 @@ RUN tar xvf /tmp/Luna_min_client.tar --strip 1 -C /usr/local/luna
 
 FROM tomcat:9.0-jre11-temurin-jammy
 
-RUN sudo apt-get update && sudo apt-get install vim
 #Fjerner passord fra logger ved oppstart
 RUN sed -i -e 's/FINE/WARNING/g' /usr/local/tomcat/conf/logging.properties
 # Fjerner default applikasjoner fra tomcat
@@ -52,6 +51,7 @@ RUN rm -rf /usr/local/tomcat/webapps.dist
 
 COPY docker/bouncycastle/bcprov-jdk18on-1.78.jar /usr/local/lib/bcprov-jdk18on-1.78.jar
 COPY docker/java-security-providers/java_bc.security /opt/java/openjdk/conf/security/java_bc.security
+RUN chmod 777 /opt/java/openjdk/conf/security/java_bc.security
 
 #HSM
 COPY --from=builder /usr/local/luna /var/usrlocal/luna
