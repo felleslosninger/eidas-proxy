@@ -26,6 +26,10 @@
 <!--	<entry key="signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>-->
 <!--	<entry key="metadata.signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>-->
 
+	<entry key="signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>
+	<entry key="metadata.signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>
+
+
 	<entry key="issuer">CN=eidas-test-2024,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
 	<entry key="serialNumber">791DBEA9B94D02AE495A0529E8E80190731AB459</entry>
 
