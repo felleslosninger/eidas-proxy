@@ -1,4 +1,4 @@
-security.provider.1=SUN
+security.provider.1=com.safenetinc.luna.provider.LunaProvider /usr/local/tomcat/webapps/ROOT/WEB-INF/hsm.cfg
 security.provider.2=SunRsaSign
 security.provider.3=SunEC
 security.provider.4=SunJSSE
@@ -9,6 +9,5 @@ security.provider.8=XMLDSig
 security.provider.9=SunPCSC
 security.provider.10=JdkLDAP
 security.provider.11=JdkSASL
-security.provider.12=SunPKCS11
+security.provider.12=SUN
 security.provider.13=org.bouncycastle.jce.provider.BouncyCastleProvider
-security.provider.14=sun.security.pkcs11.SunPKCS11 /usr/local/tomcat/webapps/ROOT/WEB-INF/hsm.cfg
