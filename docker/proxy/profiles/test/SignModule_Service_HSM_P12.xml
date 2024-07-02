@@ -26,11 +26,11 @@
 <!--	<entry key="signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>-->
 <!--	<entry key="metadata.signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>-->
 
-	<entry key="issuer">CN=Commfides Legal Person - G3 - TEST,OID.2.5.4.97=NTRNO-988312495,O=Commfides Norge AS,C=NO</entry>
-	<entry key="serialNumber">510995687471116745681131385058850219079293479519</entry>
+	<entry key="issuer">CN=eidas-test-2024,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
+	<entry key="serialNumber">791DBEA9B94D02AE495A0529E8E80190731AB459</entry>
 
-	<entry key="metadata.issuer">CN=Commfides Legal Person - G3 - TEST,OID.2.5.4.97=NTRNO-988312495,O=Commfides Norge AS,C=NO</entry>
-	<entry key="metadata.serialNumber">510995687471116745681131385058850219079293479519</entry>
+	<entry key="metadata.issuer">CN=eidas-test-2024,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
+	<entry key="metadata.serialNumber">791DBEA9B94D02AE495A0529E8E80190731AB459</entry>
 
 
 	<!-- Truststore with other countries certificates-->
@@ -41,9 +41,9 @@
 
 	<!-- Configuration for response assertion signature with RSA and Metadata-signing -->
 	<entry key="2.keyStoreType">PKCS11</entry>
-<!--	<entry key="2.keyStoreProvider">Luna</entry>-->
+	<entry key="2.keyStoreProvider">SunPKCS11-Luna</entry>
 	<entry key="2.keyStorePassword">KEYSTORE_PASSWORD</entry> <!--HSM PIN-->
-	<entry key="2.keyAlias">digitaliseringsdirektoratet--cert0</entry>
+	<entry key="2.keyAlias">eIDAS_test_2024</entry>
 
 
 
