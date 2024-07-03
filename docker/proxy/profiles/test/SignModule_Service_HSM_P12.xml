@@ -26,6 +26,9 @@
 <!--	<entry key="signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>-->
 <!--	<entry key="metadata.signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>-->
 
+	<entry key="signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa</entry>
+	<entry key="metadata.signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa</entry>
+
 	<entry key="issuer">CN=eidas,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
 	<entry key="serialNumber">5BA1082B5D9D8F9ABB8E59B731540190751F9F73</entry>
 
