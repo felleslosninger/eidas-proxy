@@ -26,14 +26,14 @@
 <!--	<entry key="signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>-->
 <!--	<entry key="metadata.signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>-->
 
-	<entry key="signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa</entry>
-	<entry key="metadata.signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa</entry>
+	<entry key="signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#ecdsa-sha512</entry>
+	<entry key="metadata.signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#ecdsa-sha512</entry>
 
-	<entry key="issuer">CN=eidas,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
-	<entry key="serialNumber">5BA1082B5D9D8F9ABB8E59B731540190751F9F73</entry>
+	<entry key="issuer">CN=eIdas-test,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,C=NO</entry>
+	<entry key="serialNumber">41422DB62225DD60CA7C879E97ED0190770248B5</entry>
 
-	<entry key="metadata.issuer">CN=eidas,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
-	<entry key="metadata.serialNumber">5BA1082B5D9D8F9ABB8E59B731540190751F9F73</entry>
+	<entry key="metadata.issuer">CN=eIdas-test,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,C=NO</entry>
+	<entry key="metadata.serialNumber">41422DB62225DD60CA7C879E97ED0190770248B5</entry>
 
 
 	<!-- Truststore with other countries certificates-->
@@ -46,7 +46,7 @@
 	<entry key="2.keyStoreType">PKCS11</entry>
 	<entry key="2.keyStoreProvider">SunPKCS11-Luna</entry>
 	<entry key="2.keyStorePassword">KEYSTORE_PASSWORD</entry> <!--HSM PIN-->
-	<entry key="2.keyAlias">eidas_test_rsa512_2024</entry>
+	<entry key="2.keyAlias">eidas_test_ECDSA_2024</entry>
 
 
 
