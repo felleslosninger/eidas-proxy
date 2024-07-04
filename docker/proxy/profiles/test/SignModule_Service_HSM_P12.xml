@@ -29,6 +29,16 @@
 <!--	<entry key="signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512</entry>-->
 <!--	<entry key="metadata.signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512</entry>-->
 
+	<entry key="signature.algorithm.whitelist">
+		http://www.w3.org/2007/05/xmldsig-more#sha256-rsa-MGF1;
+		http://www.w3.org/2007/05/xmldsig-more#sha384-rsa-MGF1;
+		http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1;
+		http://www.w3.org/2007/05/xmldsig-more#sha512-rsa;
+		http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256;
+		http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384;
+		http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512
+	</entry>
+
 	<entry key="issuer">CN=eIdas-test,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,C=NO</entry>
 	<entry key="serialNumber">5CCDE868EC6C79A9A2A079501AAA01907C611E6B</entry>
 
