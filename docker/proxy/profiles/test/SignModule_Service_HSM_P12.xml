@@ -23,11 +23,11 @@
 	<comment>HSM with a software trust store.</comment>
 
 	<!-- Signature with RSA -->
-<!--	<entry key="signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>-->
-<!--	<entry key="metadata.signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>-->
+	<entry key="signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa</entry>
+	<entry key="metadata.signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa</entry>
 
-	<entry key="signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512</entry>
-	<entry key="metadata.signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512</entry>
+<!--	<entry key="signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512</entry>-->
+<!--	<entry key="metadata.signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512</entry>-->
 
 	<entry key="issuer">CN=eIdas-test,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,C=NO</entry>
 	<entry key="serialNumber">5CCDE868EC6C79A9A2A079501AAA01907C611E6B</entry>
