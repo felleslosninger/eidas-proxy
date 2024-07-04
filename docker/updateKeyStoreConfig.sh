@@ -10,6 +10,8 @@ if [ -f "$SIGNMODULE_SERVICE_FILE" ]; then
     sed -i "s/TRUSTSTORE_PASSWORD/$TRUSTSTORE_PASSWORD/g" $SIGNMODULE_SERVICE_FILE
     sed -i "s/KEYSTORE_PASSWORD/$KEYSTORE_PASSWORD/g" $SIGNMODULE_SERVICE_FILE
     sed -i "s/KEYSTORE_KEY_PASSWORD/$KEYSTORE_KEY_PASSWORD/g" $SIGNMODULE_SERVICE_FILE
+    echo "Remove hsm security provider from java"
+    sed 's/\SunPKCS11.*/SunPKCS11/g' /opt/java/openjdk/conf/security/java_bc.security > /opt/java/openjdk/conf/security/java_bc.security
 fi
 
 # HSM
