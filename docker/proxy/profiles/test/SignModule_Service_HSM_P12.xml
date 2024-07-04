@@ -56,7 +56,7 @@
 	<entry key="2.keyStoreType">PKCS11</entry>
 	<entry key="2.keyStoreProvider">SunPKCS11-Luna</entry>
 	<entry key="2.keyStorePassword">KEYSTORE_PASSWORD</entry> <!--HSM PIN-->
-	<entry key="2.keyAlias">eIDAS_test_ecdsa_gen_2024--cert</entry>
+	<entry key="2.keyAlias">eidas_test_2024--cert</entry>
 
 
 
