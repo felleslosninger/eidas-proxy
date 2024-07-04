@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 by European Commission
+ * Copyright (c) 2023 by European Commission
  *
  * Licensed under the EUPL, Version 1.2 or - as soon they will be
  * approved by the European Commission - subsequent versions of the
@@ -22,19 +22,21 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import java.util.regex.Pattern;
 
-import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableSet;
-
 import eu.eidas.auth.commons.EIDASValues;
 import eu.eidas.auth.engine.configuration.ProtocolEngineConfigurationException;
 import eu.eidas.auth.engine.core.eidas.spec.EidasSignatureConstants;
 import eu.eidas.auth.engine.core.impl.CertificateValidator;
 import eu.eidas.auth.engine.core.impl.WhiteListConfigurator;
+
+import javax.annotation.Nullable;
+import java.security.KeyStore;
+import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static org.apache.commons.lang.StringUtils.trim;
 
 /**
  * KeyStore-based SignatureConfigurator.
@@ -60,12 +62,6 @@ public final class KeyStoreSignatureConfigurator {
         boolean requestSignWithKey =     Boolean.parseBoolean(trim(SignatureKey.REQUEST_SIGN_WITH_KEY_VALUE.getAsString(properties)));
         boolean responseSignWithKey =    Boolean.parseBoolean(trim(SignatureKey.RESPONSE_SIGN_WITH_KEY_VALUE.getAsString(properties)));
 
-        final String enableCertificateRevocationCheckingStr = trim(SignatureKey.ENABLE_CERTIFICATE_REVOCATION_CHECKING.getAsString(properties));
-        final String enableCertificateRevocationSoftFailStr = trim(SignatureKey.ENABLE_CERTIFICATE_REVOCATION_SOFT_FAIL.getAsString(properties));
-
-        boolean enableCertificateRevocationChecking = Boolean.parseBoolean(enableCertificateRevocationCheckingStr);
-        boolean enableCertificateRevocationSoftFail = Boolean.parseBoolean(enableCertificateRevocationSoftFailStr);
-
         final String signatureAlgorithm =         SignatureKey.SIGNATURE_ALGORITHM.getAsString(properties);
         final String metadataSignatureAlgorithm = SignatureKey.METADATA_SIGNATURE_ALGORITHM.getAsString(properties);
         final String digestMethodAlgorithm =      SignatureKey.DIGEST_METHOD_ALGORITHM.getAsString(properties);
@@ -82,6 +78,7 @@ public final class KeyStoreSignatureConfigurator {
         );
 
         final ArrayList<KeyStoreContent> keystoreContentList = new ArrayList<>();
+        keystoreContentList.addAll(fetchLegacyConfiguration(properties, defaultPath));
         int i = 1;
         while (properties.containsKey(i + "." + KeyStoreKey.KEYSTORE_TYPE.getKey())) {
             final KeyStoreContent keyStoreContent = new KeyStoreConfigurator(properties, getNumberPrefixConfigurationKeys(i), defaultPath).loadKeyStoreContent();
@@ -96,7 +93,7 @@ public final class KeyStoreSignatureConfigurator {
         final KeyContainer trustStoreContent = new ListKeystoreContent(keystoreContentList)
                 .subset(KeyStoreContent.KeystorePurpose.TRUSTSTORE);
         final ImmutableSet<X509Certificate> trustedCertificates = trustStoreContent.getCertificates();
-        final KeyContainerEntry signatureKeyAndCertificate = keyStoreContent.getMatchingKeyEntry(serialNumber, issuer);
+        final KeyStore.PrivateKeyEntry signatureKeyAndCertificate = keyStoreContent.getMatchingPrivateKeyEntry(serialNumber, issuer);
 
 
         final String metadataPrefix = SignatureKey.METADATA_PREFIX.getKey();
@@ -106,7 +103,7 @@ public final class KeyStoreSignatureConfigurator {
         final String metadataIssuer = properties.get(metadataIssuerKey);
 
         final ImmutableSet<X509Certificate> metadataKeystoreCertificates = keyStoreContent.getCertificates();
-        final KeyContainerEntry metadataSigningKeyAndCertificate = keyStoreContent.getMatchingKeyEntry(metadataSerialNumber, metadataIssuer);
+        final KeyStore.PrivateKeyEntry metadataSigningKeyAndCertificate = keyStoreContent.getMatchingPrivateKeyEntry(metadataSerialNumber, metadataIssuer);
 
 
         SignatureConfiguration.Builder signatureConfigurationBuilder = new SignatureConfiguration.Builder();
@@ -114,23 +111,36 @@ public final class KeyStoreSignatureConfigurator {
         signatureConfigurationBuilder.setDigestMethodAlgorithmWhiteList(digestMethodAlgorithmWhiteList);
         signatureConfigurationBuilder.setSignatureAlgorithm(signatureAlgorithm);
         signatureConfigurationBuilder.setSignatureAlgorithmWhiteList(signatureAlgorithmWhiteListStr);
-        signatureConfigurationBuilder.setSignatureKeyAndCertificate(signatureKeyAndCertificate.getPrivateKeyEntry());
-        signatureConfigurationBuilder.setSignatureKeyProvider(signatureKeyAndCertificate.getKeyProvider());
+        signatureConfigurationBuilder.setSignatureKeyAndCertificate(signatureKeyAndCertificate);
         signatureConfigurationBuilder.setTrustedCertificates(trustedCertificates);
         signatureConfigurationBuilder.setMetadataSignatureAlgorithm(metadataSignatureAlgorithm);
-        signatureConfigurationBuilder.setMetadataSigningKeyAndCertificate(metadataSigningKeyAndCertificate.getPrivateKeyEntry());
-        signatureConfigurationBuilder.setMetadataSignatureKeyProvider(metadataSigningKeyAndCertificate.getKeyProvider());
+        signatureConfigurationBuilder.setMetadataSigningKeyAndCertificate(metadataSigningKeyAndCertificate);
         signatureConfigurationBuilder.setMetadataKeystoreCertificates(metadataKeystoreCertificates);
         signatureConfigurationBuilder.setCheckedValidityPeriod(checkedValidityPeriod);
         signatureConfigurationBuilder.setDisallowedSelfSignedCertificate(disallowedSelfSignedCertificate);
         signatureConfigurationBuilder.setRequestSignWithKey(requestSignWithKey);
         signatureConfigurationBuilder.setResponseSignWithKey(responseSignWithKey);
         signatureConfigurationBuilder.setResponseSignAssertions(responseSignAssertions);
-        signatureConfigurationBuilder.setEnableCertificateRevocationChecking(enableCertificateRevocationChecking);
-        signatureConfigurationBuilder.setEnableCertificateRevocationSoftFail(enableCertificateRevocationSoftFail);
 
         return signatureConfigurationBuilder.build();
 
+    }
+
+    private List<KeyStoreContent> fetchLegacyConfiguration(Map<String, String> properties, String defaultPath) throws ProtocolEngineConfigurationException {
+        ArrayList<KeyStoreContent> legacyKeyStores = new ArrayList<>();
+
+        if(properties.containsKey(KeyStoreConfigurator.DEFAULT_KEYSTORE_CONFIGURATION_KEYS.getKeyStoreTypeConfigurationKey())) {
+            final KeyStoreContent defaultKeyStoreContent = new KeyStoreConfigurator(properties, defaultPath).loadKeyStoreContent();
+            legacyKeyStores.add(defaultKeyStoreContent);
+        }
+
+        final String metadataPrefix = SignatureKey.METADATA_PREFIX.getKey();
+        final KeyStoreConfigurator.KeyStoreConfigurationKeys keyStoreConfigurationKeys = KeyStoreConfigurator.prefixPostfixConfigurationKeys(metadataPrefix, "");
+        if (properties.containsKey(keyStoreConfigurationKeys.getKeyStoreTypeConfigurationKey())) {
+            final KeyStoreContent metadataKeyStoreContent = new KeyStoreConfigurator(properties, keyStoreConfigurationKeys, defaultPath).loadKeyStoreContent();
+            legacyKeyStores.add(metadataKeyStoreContent);
+        }
+        return legacyKeyStores;
     }
 
     private static KeyStoreConfigurator.KeyStoreConfigurationKeys getNumberPrefixConfigurationKeys(int prefixCounter) {
