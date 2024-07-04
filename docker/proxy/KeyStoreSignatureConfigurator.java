@@ -20,6 +20,7 @@ package eu.eidas.auth.engine.configuration.dom;
 import static org.apache.commons.lang.StringUtils.trim;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import java.util.regex.Pattern;
 
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
