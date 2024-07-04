@@ -30,10 +30,10 @@
 	<entry key="metadata.signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512</entry>
 
 	<entry key="issuer">CN=eIdas-test,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,C=NO</entry>
-	<entry key="serialNumber">41422DB62225DD60CA7C879E97ED0190770248B5</entry>
+	<entry key="serialNumber">5CCDE868EC6C79A9A2A079501AAA01907C611E6B</entry>
 
 	<entry key="metadata.issuer">CN=eIdas-test,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,C=NO</entry>
-	<entry key="metadata.serialNumber">41422DB62225DD60CA7C879E97ED0190770248B5</entry>
+	<entry key="metadata.serialNumber">5CCDE868EC6C79A9A2A079501AAA01907C611E6B</entry>
 
 
 	<!-- Truststore with other countries certificates-->
