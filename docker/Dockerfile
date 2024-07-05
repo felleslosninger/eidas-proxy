@@ -32,7 +32,7 @@ COPY docker/proxy/config/proxySpecificCommunicationCaches.xml eidasnode-pub/EIDA
 COPY docker/proxy/logback.xml eidasnode-pub/EIDAS-Node-Proxy/src/main/resources/logback.xml
 
 #signature whiteliste use our list to package eu.eidas.auth.engine.configuration.dom
-COPY docker/proxy/KeyStoreSignatureConfigurator.java eidasnode-pub/EIDAS-Node-Proxy/src/main/java/eu/eidas/auth/engine/configuration/dom/KeyStoreSignatureConfigurator.java
+#COPY docker/proxy/KeyStoreSignatureConfigurator.java eidasnode-pub/EIDAS-Node-Proxy/src/main/java/eu/eidas/auth/engine/configuration/dom/KeyStoreSignatureConfigurator.java
 
 #Add HSM config
 COPY docker/luna/hsm.cfg eidasnode-pub/EIDAS-Node-Proxy/src/main/webapp/WEB-INF/

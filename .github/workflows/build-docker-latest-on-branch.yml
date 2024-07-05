@@ -5,7 +5,7 @@ name: Build Dockerfile on branch with version latest
 on:
   push:
     branches:
-      - "ID-4500-v2"
+      - "ID-4500-v3"
 
 jobs:
   build:
