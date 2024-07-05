@@ -17,8 +17,10 @@
  */
 package eu.eidas.auth.engine.configuration.dom;
 
-import static org.apache.commons.lang.StringUtils.trimToNull;
+// START: Added code by ID-porten team
 import java.util.regex.Pattern;
+import static org.apache.commons.lang.StringUtils.trimToNull;
+// END: Added code by ID-porten team
 
 import com.google.common.collect.ImmutableSet;
 import eu.eidas.auth.commons.EIDASValues;
@@ -35,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.apache.commons.lang.StringUtils.trim;
+
 
 /**
  * KeyStore-based SignatureConfigurator.
@@ -150,7 +153,7 @@ public final class KeyStoreSignatureConfigurator {
 
     /**
      * Added method by ID-porten team.
-     * Also added corrsponding imports of ImmutableSet and Pattern.
+     * Also added corrsponding imports of StringUtils.trimToNull and Pattern.
      *
      * @param defaultWhiteList
      * @param myAlgs
@@ -164,7 +167,7 @@ public final class KeyStoreSignatureConfigurator {
         String[] wlAlgorithms = WHITE_LIST_SPLITTER.split(myAlgs);
         ImmutableSet.Builder<String>  tmp = ImmutableSet.builder();
         for (String algValue : wlAlgorithms) {
-            String alg = StringUtils.trimToNull(algValue);
+            String alg = trimToNull(algValue);
             tmp.add(alg);
         }
         return tmp.build();
