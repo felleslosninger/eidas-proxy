@@ -31,6 +31,9 @@ RUN cp /data/logstash-logback-encoder-*.jar /data/jackson-*.jar eidasnode-pub/EI
 COPY docker/proxy/config/proxySpecificCommunicationCaches.xml eidasnode-pub/EIDAS-SpecificCommunicationDefinition/src/main/resources/
 COPY docker/proxy/logback.xml eidasnode-pub/EIDAS-Node-Proxy/src/main/resources/logback.xml
 
+#signature whiteliste use our list to package eu.eidas.auth.engine.configuration.dom
+COPY docker/proxy/KeyStoreSignatureConfigurator.java eidasnode-pub/EIDAS-Node-Proxy/src/main/java/eu/eidas/auth/engine/configuration/dom/KeyStoreSignatureConfigurator.java
+
 #Add HSM config
 COPY docker/luna/hsm.cfg eidasnode-pub/EIDAS-Node-Proxy/src/main/webapp/WEB-INF/
 
@@ -51,6 +54,7 @@ RUN rm -rf /usr/local/tomcat/webapps.dist
 
 COPY docker/bouncycastle/bcprov-jdk18on-1.78.jar /usr/local/lib/bcprov-jdk18on-1.78.jar
 COPY docker/java-security-providers/java_bc.security /opt/java/openjdk/conf/security/java_bc.security
+RUN chmod 776 /opt/java/openjdk/conf/security/java_bc.security
 
 #HSM
 COPY --from=builder /usr/local/luna /var/usrlocal/luna
@@ -87,5 +91,7 @@ RUN mkdir -p ${CATALINA_HOME}/conf/Catalina/localhost  && chmod 770 ${CATALINA_H
 RUN mkdir -p ${CATALINA_HOME}/eidas/logs && chmod 774 ${CATALINA_HOME}/eidas/logs
 
 EXPOSE 8080
+
+ENV CLASSPATH="/var/usrlocal/luna/jsp/LunaProvider.jar:$CLASSPATH"
 
 CMD ["/bin/bash", "-c", "./bin/addEnvironmentSpesificConfigFiles.sh;./bin/updateKeyStoreConfig.sh;catalina.sh run"]

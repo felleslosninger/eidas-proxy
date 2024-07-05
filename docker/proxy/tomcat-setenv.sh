@@ -16,7 +16,7 @@ export JAVA_OPTS="$JAVA_OPTS -Djava.security.debug=sunpkcs11 -Djava.security.deb
 
 # eidas config
 export EIDAS_PROXY_CONFIG_REPOSITORY="/etc/config/eidas-proxy/"
-export CLASSPATH=$CLASSPATH:$EIDAS_PROXY_CONFIG_REPOSITORY
+export CLASSPATH="$CLASSPATH:$EIDAS_PROXY_CONFIG_REPOSITORY:/var/usrlocal/luna/jsp/LunaProvider.jar"
 # Auditlogs config: -DLOG_HOME="<myDirectoryName>"
 export LOG_HOME="/usr/local/tomcat/eidas/logs"
 
