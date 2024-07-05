@@ -34,6 +34,9 @@ COPY docker/proxy/logback.xml eidasnode-pub/EIDAS-Node-Proxy/src/main/resources/
 #Add HSM config
 COPY docker/luna/hsm.cfg eidasnode-pub/EIDAS-Node-Proxy/src/main/webapp/WEB-INF/
 
+#signature whiteliste use our list to package eu.eidas.auth.engine.configuration.dom
+COPY docker/proxy/KeyStoreSignatureConfigurator.java eidasnode-pub/EIDAS-Node-Proxy/src/main/java/eu/eidas/auth/engine/configuration/dom/KeyStoreSignatureConfigurator.java
+
 # Build eidas proxy service
 RUN cd eidasnode-pub && mvn clean install --file EIDAS-Parent/pom.xml -P NodeOnly -P-specificCommunicationJcacheIgnite -DskipTests
 
@@ -56,6 +59,7 @@ COPY docker/java-security-providers/java_bc.security /opt/java/openjdk/conf/secu
 COPY --from=builder /usr/local/luna /var/usrlocal/luna
 ENV ChrystokiConfigurationPath=/var/usrlocal/luna/config
 COPY docker/luna/Chrystoki.conf /var/usrlocal/luna/config/
+COPY --from=builder /usr/local/luna/jsp/64/libLunaAPI.so /opt/java/openjdk/lib/
 
 # Tomcat config
 COPY docker/proxy/server.xml ${CATALINA_HOME}/conf/server.xml

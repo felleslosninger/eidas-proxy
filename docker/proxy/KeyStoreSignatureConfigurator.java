@@ -17,9 +17,7 @@
  */
 package eu.eidas.auth.engine.configuration.dom;
 
-import static org.apache.commons.lang.StringUtils.trim;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
+import static org.apache.commons.lang.StringUtils.trimToNull;
 import java.util.regex.Pattern;
 
 import com.google.common.collect.ImmutableSet;
@@ -66,10 +64,13 @@ public final class KeyStoreSignatureConfigurator {
         final String metadataSignatureAlgorithm = SignatureKey.METADATA_SIGNATURE_ALGORITHM.getAsString(properties);
         final String digestMethodAlgorithm =      SignatureKey.DIGEST_METHOD_ALGORITHM.getAsString(properties);
 
+        // START: Changed code by ID-porten team
         final ImmutableSet<String> allowedSignatureAlgorithmWhitelist = verifySigningAlgorithmsWhitelisted(
                 EidasSignatureConstants.DEFAULT_SIGNATURE_ALGORITHM_WHITE_LIST,
                 SignatureKey.SIGNATURE_ALGORITHM_WHITE_LIST.getAsString(properties)
         );
+        // END: Changed code by ID-porten team
+
         final String signatureAlgorithmWhiteListStr = String.join(EIDASValues.SEMICOLON.toString(), allowedSignatureAlgorithmWhitelist);
 
         final ImmutableSet<String> digestMethodAlgorithmWhiteList = WhiteListConfigurator.getAllowedAlgorithms(
@@ -147,6 +148,14 @@ public final class KeyStoreSignatureConfigurator {
         return KeyStoreConfigurator.prefixPostfixConfigurationKeys(prefixCounter + ".","");
     }
 
+    /**
+     * Added method by ID-porten team.
+     * Also added corrsponding imports of ImmutableSet and Pattern.
+     *
+     * @param defaultWhiteList
+     * @param myAlgs
+     * @return
+     */
     private static ImmutableSet<String> verifySigningAlgorithmsWhitelisted(ImmutableSet<String> defaultWhiteList, String myAlgs) {
         if(myAlgs == null || myAlgs.isEmpty()){
             return defaultWhiteList;

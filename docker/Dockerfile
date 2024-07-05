@@ -54,7 +54,7 @@ RUN rm -rf /usr/local/tomcat/webapps.dist
 
 COPY docker/bouncycastle/bcprov-jdk18on-1.78.jar /usr/local/lib/bcprov-jdk18on-1.78.jar
 COPY docker/java-security-providers/java_bc.security /opt/java/openjdk/conf/security/java_bc.security
-RUN chmod 777 /opt/java/openjdk/conf/security/java_bc.security
+RUN chmod 776 /opt/java/openjdk/conf/security/java_bc.security
 
 #HSM
 COPY --from=builder /usr/local/luna /var/usrlocal/luna
