@@ -43,10 +43,10 @@
 -->
 
 	<entry key="issuer">CN=eIdas-test,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger</entry>
-	<entry key="serialNumber">8f179fcae504421</entry>
+	<entry key="serialNumber">08</entry>
 
 	<entry key="metadata.issuer">CN=eIdas-test,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger</entry>
-	<entry key="metadata.serialNumber">8f179fcae504421</entry>
+	<entry key="metadata.serialNumber">08</entry>
 
 
 	<!-- Truststore with other countries certificates-->
