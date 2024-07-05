@@ -43,10 +43,10 @@
 -->
 
 	<entry key="issuer">CN=eIdas-test,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger</entry>
-	<entry key="serialNumber">08</entry>
+	<entry key="serialNumber">HSM_CERTIFICATE_SERIAL_NUMBER_HEX</entry>
 
 	<entry key="metadata.issuer">CN=eIdas-test,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger</entry>
-	<entry key="metadata.serialNumber">08</entry>
+	<entry key="metadata.serialNumber">HSM_CERTIFICATE_SERIAL_NUMBER_HEX</entry>
 
 
 	<!-- Truststore with other countries certificates-->
