@@ -1,5 +1,6 @@
 
 name: Build Dockerfile on branch with version latest
+# change branch if you need to build latest image on branch and change image.yaml in idporten-cd to latest image and change policy to allways.
 
 on:
   push:
