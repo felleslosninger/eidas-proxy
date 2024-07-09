@@ -39,8 +39,8 @@
 
 	<!-- Configuration for response assertion signature with RSA and Metadata-signing -->
 	<entry key="2.keyStorePath">./keystore/norwegianEidasKeyStore.p12</entry>
-	<entry key="2.keyStorePassword">KEYSTORE_PASSWORD</entry>
-	<entry key="2.keyPassword">KEYSTORE_KEY_PASSWORD</entry>
+	<entry key="2.keyStorePassword">SIGN_KEYSTORE_PASSWORD</entry>
+	<entry key="2.keyPassword">SIGN_KEYSTORE_KEY_PASSWORD</entry>
 	<entry key="2.keyStoreType">PKCS12</entry>
 
 
