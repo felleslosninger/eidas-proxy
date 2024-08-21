@@ -31,6 +31,8 @@ services:
       - TRUSTSTORE_PASSWORD=changeit
       - SIGN_KEYSTORE_PASSWORD=changeit
       - SIGN_KEYSTORE_KEY_PASSWORD=changeit
+      - SIGN_METADATA_KEYSTORE_PASSWORD=changeit
+      - SIGN_METADATA_KEYSTORE_KEY_PASSWORD=changeit
       - LIGHT_TOKEN_PROXYSERVICE_REQUEST_SECRET=mySecretProxyserviceRequest
       - LIGHT_TOKEN_PROXYSERVICE_RESPONSE_SECRET=mySecretProxyserviceResponse
       - CATALINA_OPTS=-Xms512m -Xmx1024m -DappEnvironment=$${ENVIRONMENT} -DredisPassword=$${REDIS_PASSWORD} -DredisPort=$${REDIS_PORT} -DredisHost=$${REDIS_HOST} -DlightTokenProxyserviceRequestSecret=$${LIGHT_TOKEN_PROXYSERVICE_REQUEST_SECRET} -DlightTokenProxyserviceResponseSecret=$${LIGHT_TOKEN_PROXYSERVICE_RESPONSE_SECRET}

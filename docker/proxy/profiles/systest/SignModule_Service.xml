@@ -25,23 +25,29 @@
 	<entry key="signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>
 	<entry key="metadata.signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>
 
-	<entry key="issuer">CN=norwegian-eidasnode-proxy,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
-	<entry key="serialNumber">475755E7EA83E6201AF6F1064302018FA4B7AED5</entry>
-	<entry key="metadata.issuer">CN=norwegian-eidasnode-proxy,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
-	<entry key="metadata.serialNumber">475755E7EA83E6201AF6F1064302018FA4B7AED5</entry>
+    <entry key="issuer">CN=norwegian-eidasnode-proxy,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
+    <entry key="serialNumber">475755E7EA83E6201AF6F1064302018FA4B7AED5</entry>
 
+    <entry key="metadata.issuer">CN=eidas-node-metadata,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
+    <entry key="metadata.serialNumber">5C439B135211720D4F80BB2579F2019173ADCE66</entry>
 
-	<!-- Truststore with other countries certificates-->
-	<entry key="1.keyStorePath">./keystore/otherCountriesEidasKeyStore.p12</entry>
-	<entry key="1.keyStorePassword">TRUSTSTORE_PASSWORD</entry>
-	<entry key="1.keyStoreType">PKCS12</entry>
-	<entry key="1.keyStorePurpose">TRUSTSTORE</entry>
+    <!-- Truststore with other countries certificates-->
+    <entry key="1.keyStorePath">./keystore/otherCountriesEidasKeyStore.p12</entry>
+    <entry key="1.keyStorePassword">TRUSTSTORE_PASSWORD</entry>
+    <entry key="1.keyStoreType">PKCS12</entry>
+    <entry key="1.keyStorePurpose">TRUSTSTORE</entry>
 
-	<!-- Configuration for response assertion signature with RSA and Metadata-signing -->
-	<entry key="2.keyStorePath">./keystore/norwegianEidasKeyStore.p12</entry>
-	<entry key="2.keyStorePassword">SIGN_KEYSTORE_PASSWORD</entry>
-	<entry key="2.keyPassword">SIGN_KEYSTORE_KEY_PASSWORD</entry>
-	<entry key="2.keyStoreType">PKCS12</entry>
+    <!-- Configuration for response assertion signature with RSA -->
+    <entry key="2.keyStorePath">./keystore/norwegianEidasKeyStore.p12</entry>
+    <entry key="2.keyStorePassword">SIGN_KEYSTORE_PASSWORD</entry>
+    <entry key="2.keyPassword">SIGN_KEYSTORE_KEY_PASSWORD</entry>
+    <entry key="2.keyStoreType">PKCS12</entry>
+
+    <!-- Configuration for Metadata-signing with RSA -->
+    <entry key="3.keyStorePath">./keystore/norwegianEidasKeyStore_METADATA.p12</entry>
+    <entry key="3.keyStorePassword">SIGN_METADATA_KEYSTORE_PASSWORD</entry>
+    <entry key="3.keyPassword">SIGN_METADATA_KEYSTORE_KEY_PASSWORD</entry>
+    <entry key="3.keyStoreType">PKCS12</entry>
 
 
 </properties>
