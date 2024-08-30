@@ -70,7 +70,7 @@ COPY docker/proxy/server.xml ${CATALINA_HOME}/conf/server.xml
 RUN mkdir -p /etc/config && chmod 770 /etc/config
 COPY docker/proxy/config /etc/config/eidas-proxy
 COPY docker/proxy/profiles /etc/config/profiles
-RUN chmod 776 /etc/config/eidas-proxy
+RUN chmod 776 /etc/config/eidas-proxy && mkdir /etc/config/eidas-proxy/keystore && chmod 776 /etc/config/eidas-proxy/keystore
 RUN chmod 766 /etc/config/profiles/docker/SignModule_Service*.xml
 
 # temp copy HSM testing files
