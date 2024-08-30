@@ -27,8 +27,7 @@
 	<entry key="signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#rsa-sha512</entry>
 	<entry key="metadata.signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#rsa-sha512</entry>
 -->
-	<entry key="signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512</entry>
-	<entry key="metadata.signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512</entry>
+
 
 	<!--
 	<entry key="signature.algorithm.whitelist">
@@ -42,11 +41,15 @@
 	</entry>
 -->
 
-	<entry key="issuer">HSM_CERTIFICATE_ISSUER</entry>
-	<entry key="serialNumber">HSM_CERTIFICATE_SERIAL_NUMBER_HEX</entry>
+    <!-- Signature with ECDSA -->
+	<entry key="issuer">HSM_SIGN_CERTIFICATE_ISSUER</entry>
+	<entry key="serialNumber">HSM_SIGN_CERTIFICATE_SERIAL_NUMBER_HEX</entry>
+    <entry key="signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512</entry>
 
-	<entry key="metadata.issuer">HSM_CERTIFICATE_ISSUER</entry>
-	<entry key="metadata.serialNumber">HSM_CERTIFICATE_SERIAL_NUMBER_HEX</entry>
+    <!-- Signature Metadata with ECDSA -->
+	<entry key="metadata.issuer">HSM_METADATA_SIGN_CERTIFICATE_ISSUER</entry>
+	<entry key="metadata.serialNumber">HSM_METADATA_SIGN_CERTIFICATE_SERIAL_NUMBER_HEX</entry>
+    <entry key="metadata.signature.algorithm">http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512</entry>
 
 
 	<!-- Truststore with other countries certificates-->
@@ -55,12 +58,16 @@
 	<entry key="1.keyStoreType">PKCS12</entry>
 	<entry key="1.keyStorePurpose">TRUSTSTORE</entry>
 
-	<!-- Configuration for response assertion signature with RSA and Metadata-signing -->
+	<!-- Configuration for response assertion signature -->
 	<entry key="2.keyStoreType">PKCS11</entry>
 	<entry key="2.keyStoreProvider">SunPKCS11-Luna</entry>
 	<entry key="2.keyStorePassword">HSM_PASSWORD</entry> <!--HSM PIN-->
-	<entry key="2.keyAlias">HSM_ALIAS</entry>
+	<entry key="2.keyAlias">HSM_SIGN_ALIAS</entry>
 
-
+    <!-- Configuration for Metadata-signing -->
+    <entry key="3.keyStoreType">PKCS11</entry>
+    <entry key="3.keyStoreProvider">SunPKCS11-Luna</entry>
+    <entry key="3.keyStorePassword">HSM_PASSWORD</entry> <!--HSM PIN-->
+    <entry key="3.keyAlias">HSM_METADATA_SIGN_ALIAS</entry>
 
 </properties>
