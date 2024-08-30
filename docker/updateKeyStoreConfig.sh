@@ -12,6 +12,10 @@ if [ -f "$SIGNMODULE_SERVICE_FILE" ]; then
     sed -i "s/SIGN_KEYSTORE_KEY_PASSWORD/$SIGN_KEYSTORE_KEY_PASSWORD/g" $SIGNMODULE_SERVICE_FILE
     sed -i "s/SIGN_METADATA_KEYSTORE_PASSWORD/$SIGN_METADATA_KEYSTORE_PASSWORD/g" $SIGNMODULE_SERVICE_FILE
     sed -i "s/SIGN_METADATA_KEYSTORE_KEY_PASSWORD/$SIGN_METADATA_KEYSTORE_KEY_PASSWORD/g" $SIGNMODULE_SERVICE_FILE
+    echo $TRUSTSTORE_BASE64 | base64 -d > /etc/config/eidas-proxy/keystore/otherCountriesEidasKeyStore.p12
+    echo $SIGN_KEYSTORE_BASE64 | base64 -d > /etc/config/eidas-proxy/keystore/norwegianEidasKeyStore.p12
+    echo $SIGN_METADATA_KEYSTORE_BASE64 | base64 -d > /etc/config/eidas-proxy/keystore/norwegianEidasKeyStore_METADATA.p12
+    echo "converted keystore and created file " && ls -l /etc/config/eidas-proxy/keystore/
     cat /opt/java/openjdk/conf/security/plain.java_bc.security > /opt/java/openjdk/conf/security/java_bc.security
     echo "Removed HSM security provider from java" && grep SunPKCS11 /opt/java/openjdk/conf/security/java_bc.security
 fi

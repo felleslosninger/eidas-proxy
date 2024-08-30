@@ -71,6 +71,7 @@ COPY docker/proxy/tomcat-setenv.sh ${CATALINA_HOME}/bin/setenv.sh
 RUN mkdir -p /etc/config && chmod 777 /etc/config
 COPY docker/proxy/config /etc/config/eidas-proxy
 COPY docker/proxy/profiles /etc/config/profiles
+RUN chmod 776 /etc/config/eidas-proxy && mkdir /etc/config/eidas-proxy/keystore && chmod 776 /etc/config/eidas-proxy/keystore
 RUN chmod 766 /etc/config/profiles/docker/SignModule_Service*.xml
 
 COPY docker/addEnvironmentSpesificConfigFiles.sh docker/updateKeyStoreConfig.sh ${CATALINA_HOME}/bin/
