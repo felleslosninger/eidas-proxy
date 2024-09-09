@@ -46,6 +46,7 @@ RUN mkdir -p /usr/local/luna
 RUN tar xvf /tmp/Luna_min_client.tar --strip 1 -C /usr/local/luna
 
 FROM tomcat:9.0-jre11-temurin-jammy
+RUN apt-get update && apt-get install -y vim && apt-get install -y file
 
 #Fjerner passord fra logger ved oppstart
 RUN sed -i -e 's/FINE/WARNING/g' /usr/local/tomcat/conf/logging.properties
