@@ -25,4 +25,19 @@
     <!-- Management of the encryption activation -->
     <entry key="encryptionActivation">encryptionConf.xml</entry>
 
+    <!-- Key store configuration -->
+    <entry key="keyStorePath">./keystore/eidasEncryptionKeyStore.p12</entry>
+    <entry key="keyStorePassword">ENCRYPT_KEYSTORE_PASSWORD</entry>
+    <entry key="keyPassword">ENCRYPT_KEYSTORE_KEY_PASSWORD</entry>
+    <entry key="keyStoreType">PKCS12</entry>
+
+    <!-- Key transport config -->
+    <!--  If not present then no decryption will be applied on response -->
+    <entry key="responseDecryptionIssuer">CN=eidas-local-encryption,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,C=NO</entry>
+    <entry key="serialNumber">7F17461D3F95EE34A7302C6F70E60191F9B4D7FC</entry>
+    <!--
+    <entry key="responseDecryptionIssuer">ENCRYPT_CERTIFICATE_ISSUER</entry>
+    <entry key="serialNumber">ENCRYPT_CERTIFICATE_SERIAL_NUMBER_HEX</entry>
+-->
+
 </properties>

@@ -1,6 +1,20 @@
 #!/bin/bash
 
 # NB: Passwords must be configured in idporten-cd in container.env
+
+#ENCRYPTION: Add passwords to config file for encryption
+ENCRYPTMODULE_PROXY_FILE=/etc/config/eidas-proxy/EncryptModule_Service.xml
+if [ -f "$ENCRYPTMODULE_PROXY_FILE" ]; then
+    echo "Update keystore-config in $ENCRYPTMODULE_PROXY_FILE" && printenv | grep ENCRYPT_CERTIFICATE
+    sed -i "s/ENCRYPT_KEYSTORE_PASSWORD/$ENCRYPT_KEYSTORE_PASSWORD/g" $ENCRYPTMODULE_PROXY_FILE
+    sed -i "s/ENCRYPT_KEYSTORE_KEY_PASSWORD/$ENCRYPT_KEYSTORE_KEY_PASSWORD/g" $ENCRYPTMODULE_PROXY_FILE
+    sed -i "s/ENCRYPT_CERTIFICATE_SERIAL_NUMBER_HEX/$ENCRYPT_CERTIFICATE_SERIAL_NUMBER_HEX/g" $ENCRYPTMODULE_PROXY_FILE
+    sed -i "s/ENCRYPT_CERTIFICATE_ISSUER/$ENCRYPT_CERTIFICATE_ISSUER/g" $ENCRYPTMODULE_PROXY_FILE
+    echo "$ENCRYPT_KEYSTORE_BASE64" | base64 -d > /etc/config/eidas-proxy/keystore/eidasEncryptionKeyStore.p12
+    echo "Converted encryption keystore and created 1 files" && ls -l /etc/config/eidas-proxy/keystore/
+fi
+
+
 # Add passwords to config file for signing
 
 # For keystore usage in local-docker and systest
