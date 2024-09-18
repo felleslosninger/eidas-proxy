@@ -54,9 +54,12 @@
 
     <entry key="node.metadata.not.signed.descriptors">https://dummy.no</entry>
 
-    <entry key="eidas.protocol.version">1.3</entry>
+    <entry key="eidas.protocol.version">1.4;1.3</entry>
+
     <entry key="service.LoA">http://eidas.europa.eu/LoA/high</entry>
 
-
+    <!-- Temp set explicitly because of default null value fails. Report bug and remove when fixed in next version, i hope. -->
+    <!-- BC=Bouncy castle security provider, see docker/java-security-providers/java_bc.security file -->
+    <entry key="logging.hash.digest.provider">BC</entry>
 
 </properties>

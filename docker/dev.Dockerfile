@@ -22,7 +22,7 @@ RUN curl -L -O https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson
 RUN curl -L -O https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/${JACKSON_LIB_VERSION}/jackson-annotations-${JACKSON_LIB_VERSION}.jar
 
 # Download & build EU-eidas software
-ARG EIDAS_NODE_VERSION=2.7.1
+ARG EIDAS_NODE_VERSION=2.8.0
 RUN git clone --depth 1 --branch eidasnode-${EIDAS_NODE_VERSION} https://ec.europa.eu/digital-building-blocks/code/scm/eid/eidasnode-pub.git
 
 # Add our custom libs and config to EU-eidas software before build

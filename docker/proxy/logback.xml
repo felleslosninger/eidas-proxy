@@ -16,7 +16,10 @@
     </appender>
 
 
-    <logger name="eu.eidas.auth.engine" level="TRACE" additivity="false">
+    <logger name="eu.eidas.node.service.ProxyServiceMetadataGeneratorServlet" level="ERROR" additivity="false">
+        <appender-ref ref="APPLICATION"/>
+    </logger>
+    <logger name="eu.eidas.auth.engine" level="INFO" additivity="false">
         <appender-ref ref="APPLICATION"/>
     </logger>
     <logger name="eu.eidas.node" level="INFO" additivity="false">
