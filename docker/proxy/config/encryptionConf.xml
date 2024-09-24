@@ -16,7 +16,10 @@
 
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="EncryptTo.CA">true</entry>
+	<entry key="EncryptTo.CA">true</entry> <!-- demo country CA, no in use in prod-->
 
 	<entry key="EncryptTo.NO">true</entry>
+	<entry key="EncryptTo.SE">true</entry>
+	<entry key="EncryptTo.DK">true</entry>
+
 </properties>
