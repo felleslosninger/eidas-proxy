@@ -61,4 +61,7 @@
     <!-- BC=Bouncy castle security provider, see docker/java-security-providers/java_bc.security file -->
     <entry key="logging.hash.digest.provider">BC</entry>
 
+    <entry key="interconnection.graph.enabled">true</entry>
+
+
 </properties>
