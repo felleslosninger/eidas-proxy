@@ -6,4 +6,5 @@
     <entry key="redis.host">${redisHost}</entry>
     <entry key="redis.port">${redisPort}</entry>
     <entry key="redis.password">${redisPassword}</entry>
+    <entry key="redis.timeout">1800</entry>
 </properties>
