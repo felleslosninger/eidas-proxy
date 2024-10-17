@@ -28,8 +28,12 @@
 
     <!-- ProxyService contact -->
     <entry key="service.contact.support.email">brukerstotte@digdir.no</entry>
+    <entry key="service.contact.support.givenname">Customer support</entry>
     <entry key="service.contact.support.company">The Norwegian Digitalisation Agency</entry>
 
+    <entry key="service.contact.technical.email">servicedesk@digdir.no</entry>
+    <entry key="service.contact.technical.givenname">Technical support</entry>
+    <entry key="service.contact.technical.company">The Norwegian Digitalisation Agency</entry>
 
     <!-- ProxyService organization -->
     <entry key="service.organization.name">The Norwegian Digitalisation Agency</entry>
