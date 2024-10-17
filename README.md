@@ -1,7 +1,7 @@
 # eidas-proxy
 Norwegian generic eIDAS-proxy-service build from eIDAS source code.
 
-See these documents in https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eIDAS-Node+version+2.8:
+See these documents in https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eIDAS-Node+version+2.8.1:
 * eIDAS-Node National IdP and SP Integration Guide
 * eIDAS-Node Installation Quick Start Guide
 * eIDAS-Node Installation and Configuration Guide
