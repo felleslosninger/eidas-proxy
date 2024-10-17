@@ -16,10 +16,21 @@
 
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="EncryptTo.CA">true</entry> <!-- demo country CA, not in use in prod-->
 
-	<entry key="EncryptTo.NO">true</entry>
-	<entry key="EncryptTo.SE">true</entry>
-	<entry key="EncryptTo.DK">true</entry>
+    <!--
+     2. When the configuration parameter response.encryption.mandatory is set to true on the
+proxy side, then the settings in encryptionConf.xml are ignored and each response is
+encrypted. When the configuration parameter response.encryption.mandatory is set to true
+on the connector side, then only encrypted responses are allowed for successful authentication.
+     -->
+    <!-- 'response.encryption.mandatory' er default true i eIDAS-koden, så det som står under blir ikkje brukt då
+     sjå doc for versjon X: 'eIDAS-Node and SAML vX pdf' side 15 "3.4.4 Encryption configuration".
+     -->
 
+   <!--
+    <entry key="Encryption.enable">true</entry>
+
+    <entry key="EncryptTo.CA">false</entry>
+
+-->
 </properties>
