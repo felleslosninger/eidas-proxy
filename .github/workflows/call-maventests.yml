@@ -25,9 +25,12 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME}}:${{steps.set-image-tag.outputs.image-tag}}
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@d710430a6722f083d3b36b8339ff66b32f22ee55 # pin@v0.19.0
+        uses: aquasecurity/trivy-action@915b19bbe73b92a6cf82a1bc12b087c9a19a5fe2 # pin@v0.28.0
+        id: trivy-primary
+        env:
+          TRIVY_DB_REPOSITORY: ghcr.io/aquasecurity/trivy-db:2,public.ecr.aws/aquasecurity/trivy-db:2
+          TRIVY_JAVA_DB_REPOSITORY: ghcr.io/aquasecurity/trivy-java-db:1,public.ecr.aws/aquasecurity/trivy-java-db:1
         with:
-          image-ref: ${{ env.IMAGE_NAME}}:${{steps.set-image-tag.outputs.image-tag}}
-          exit-code: '1'
-          severity: 'CRITICAL,HIGH'
-
+          image-ref: "${{ env.IMAGE_NAME}}:${{steps.set-image-tag.outputs.image-tag}}"
+          exit-code: "1"
+          severity: "CRITICAL,HIGH"
