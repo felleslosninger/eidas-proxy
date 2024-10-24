@@ -27,7 +27,7 @@
     <entry key="service.metadata.url">https://proxy.test.eidasnode.no/ServiceMetadata</entry>
 
     <!-- ProxyService contact -->
-    <entry key="service.contact.support.email">brukerstotte@digdir.no</entry>
+    <entry key="service.contact.support.email">servicedesk@digdir.no</entry> <!-- To servicedesk in Test env. since technical people use this to contact us on integration issues since this is included in the error messages in our Proxy -->
     <entry key="service.contact.support.givenname">Customer support</entry>
     <entry key="service.contact.support.company">The Norwegian Digitalisation Agency</entry>
 
