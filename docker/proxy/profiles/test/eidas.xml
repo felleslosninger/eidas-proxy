@@ -27,7 +27,7 @@
     <entry key="service.metadata.url">https://proxy.test.eidasnode.no/ServiceMetadata</entry>
 
     <!-- ProxyService contact -->
-    <entry key="service.contact.support.email">brukerstotte@digdir.no</entry>
+    <entry key="service.contact.support.email">servicedesk@digdir.no</entry>
     <entry key="service.contact.support.givenname">Customer support</entry>
     <entry key="service.contact.support.company">The Norwegian Digitalisation Agency</entry>
 
