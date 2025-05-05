@@ -5,7 +5,7 @@ WORKDIR /data
 ARG GIT_PACKAGE_TOKEN
 
 # Download our redis-lib
-ARG REDIS_LIB_VERSION=0.1.2
+ARG REDIS_LIB_VERSION=1.0.0
 RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
   https://maven.pkg.github.com/felleslosninger/eidas-redis-lib/no/idporten/eidas/eidas-redis/${REDIS_LIB_VERSION}/eidas-redis-${REDIS_LIB_VERSION}.jar
 RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
@@ -13,16 +13,16 @@ RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
 RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
   https://maven.pkg.github.com/felleslosninger/eidas-redis-lib/no/idporten/eidas/eidas-redis-specific-communication/${REDIS_LIB_VERSION}/eidas-redis-specific-communication-${REDIS_LIB_VERSION}.jar
 
-# Logstash-logback-endcoder to enable JSON logging (needs jackson). Versions must match logback in proxy pom.xml
-ARG LOG_LIB_VERSION=7.2
+# Logstash-logback-endcoder to enable JSON logging (needs jackson). Version must be competable with Logback version in eu eIDAS parent pom.xml.
+ARG LOG_LIB_VERSION=8.0
 RUN curl -L -O https://repo1.maven.org/maven2/net/logstash/logback/logstash-logback-encoder/${LOG_LIB_VERSION}/logstash-logback-encoder-${LOG_LIB_VERSION}.jar
-ARG JACKSON_LIB_VERSION=2.13.3
+ARG JACKSON_LIB_VERSION=2.15.2
 RUN curl -L -O https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/${JACKSON_LIB_VERSION}/jackson-core-${JACKSON_LIB_VERSION}.jar
 RUN curl -L -O https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/${JACKSON_LIB_VERSION}/jackson-databind-${JACKSON_LIB_VERSION}.jar
 RUN curl -L -O https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/${JACKSON_LIB_VERSION}/jackson-annotations-${JACKSON_LIB_VERSION}.jar
 
 # Download & build EU-eidas software
-ARG EIDAS_NODE_VERSION=2.8.1
+ARG EIDAS_NODE_VERSION=2.9.0
 RUN git clone --depth 1 --branch eidasnode-${EIDAS_NODE_VERSION} https://ec.europa.eu/digital-building-blocks/code/scm/eid/eidasnode-pub.git
 
 # Add our custom libs and config to EU-eidas software before build
@@ -45,14 +45,14 @@ COPY docker/luna/Luna_min_client.tar /tmp
 RUN mkdir -p /usr/local/luna
 RUN tar xvf /tmp/Luna_min_client.tar --strip 1 -C /usr/local/luna
 
-FROM tomcat:9.0-jre11-temurin-jammy
+FROM tomcat:9.0-jre17-temurin-jammy
 
 #Fjerner passord fra logger ved oppstart
 RUN sed -i -e 's/FINE/WARNING/g' /usr/local/tomcat/conf/logging.properties
 # Fjerner default applikasjoner fra tomcat
 RUN rm -rf /usr/local/tomcat/webapps.dist
 
-COPY docker/bouncycastle/bcprov-jdk18on-1.78.jar /usr/local/lib/bcprov-jdk18on-1.78.jar
+COPY docker/bouncycastle/bcprov-jdk18on-1.78.1.jar /usr/local/lib/bcprov-jdk18on-1.78.1.jar
 COPY docker/java-security-providers/*java_bc.security /opt/java/openjdk/conf/security/
 RUN chmod 776 /opt/java/openjdk/conf/security/java_bc.security
 
