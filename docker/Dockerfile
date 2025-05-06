@@ -45,7 +45,7 @@ COPY docker/luna/Luna_min_client.tar /tmp
 RUN mkdir -p /usr/local/luna
 RUN tar xvf /tmp/Luna_min_client.tar --strip 1 -C /usr/local/luna
 
-FROM tomcat:9.0.96-jre17-temurin-jammy
+FROM tomcat:9.0.99-jre17-temurin-jammy
 
 #Fjerner passord fra logger ved oppstart
 RUN sed -i -e 's/FINE/WARNING/g' /usr/local/tomcat/conf/logging.properties
