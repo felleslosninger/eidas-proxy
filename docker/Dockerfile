@@ -5,7 +5,7 @@ WORKDIR /data
 ARG GIT_PACKAGE_TOKEN
 
 # Download our redis-lib
-ARG REDIS_LIB_VERSION=1.0.1
+ARG REDIS_LIB_VERSION=1.0.2
 RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
   https://maven.pkg.github.com/felleslosninger/eidas-redis-lib/no/idporten/eidas/eidas-redis/${REDIS_LIB_VERSION}/eidas-redis-${REDIS_LIB_VERSION}.jar
 RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
