@@ -5,7 +5,7 @@ WORKDIR /data
 ARG GIT_PACKAGE_TOKEN
 
 # Download our redis-lib
-ARG REDIS_LIB_VERSION=1.0.2
+ARG REDIS_LIB_VERSION=1.0.4
 RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
   https://maven.pkg.github.com/felleslosninger/eidas-redis-lib/no/idporten/eidas/eidas-redis/${REDIS_LIB_VERSION}/eidas-redis-${REDIS_LIB_VERSION}.jar
 RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
@@ -45,7 +45,7 @@ COPY docker/luna/Luna_min_client.tar /tmp
 RUN mkdir -p /usr/local/luna
 RUN tar xvf /tmp/Luna_min_client.tar --strip 1 -C /usr/local/luna
 
-FROM tomcat:9.0.88-jre17-temurin-jammy
+FROM tomcat:9.0-jre17-temurin-jammy
 
 #Fjerner passord fra logger ved oppstart
 RUN sed -i -e 's/FINE/WARNING/g' /usr/local/tomcat/conf/logging.properties
