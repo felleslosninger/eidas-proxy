@@ -3,7 +3,7 @@ export PATH="/var/usrlocal/luna/bin/64:/var/usrlocal/luna/jsp:$PATH"
 
 # Bouncycastle java security provider
 export JAVA_OPTS="$JAVA_OPTS -Djava.security.properties=/opt/java/openjdk/conf/security/java_bc.security"
-export JAVA_OPTS="$JAVA_OPTS --module-path /usr/local/lib/bcprov-jdk18on-1.78.jar"
+export JAVA_OPTS="$JAVA_OPTS --module-path /usr/local/lib/bcprov-jdk18on-1.78.1.jar"
 export JAVA_OPTS="$JAVA_OPTS --add-modules org.bouncycastle.provider"
 
 # Luna java security provider for HSM

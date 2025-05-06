@@ -14,6 +14,7 @@ jobs:
   build-publish-image:
     uses: felleslosninger/github-workflows/.github/workflows/ci-build-publish-image.yml@main
     with:
+      java-version: 17
       image-name: eidas-proxy
       application-type: docker
       add-git-package-token: true
