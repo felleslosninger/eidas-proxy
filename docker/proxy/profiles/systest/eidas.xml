@@ -58,7 +58,7 @@
 
     <entry key="node.metadata.not.signed.descriptors">https://dummy.no</entry>
 
-    <entry key="eidas.protocol.version">1.4;1.3;1.2</entry>
+    <entry key="eidas.protocol.version">1.4.1;1.4;1.3;1.2</entry>
 
     <entry key="service.LoA">http://eidas.europa.eu/LoA/high</entry>
 
