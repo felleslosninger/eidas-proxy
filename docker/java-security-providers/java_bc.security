@@ -10,6 +10,7 @@ security.provider.9=JdkLDAP
 security.provider.10=JdkSASL
 security.provider.11=org.bouncycastle.jce.provider.BouncyCastleProvider
 security.provider.12=SunPKCS11 /usr/local/tomcat/webapps/ROOT/WEB-INF/hsm.cfg
+security.provider.13=SunEC
 #security.provider.13=com.safenetinc.luna.provider.LunaProvider /usr/local/tomcat/webapps/ROOT/WEB-INF/hsm.cfg
 #security.provider.14=Luna /usr/local/tomcat/webapps/ROOT/WEB-INF/hsm.cfg
 
