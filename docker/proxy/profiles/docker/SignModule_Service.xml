@@ -29,7 +29,7 @@
 	<entry key="serialNumber">475755E7EA83E6201AF6F1064302018FA4B7AED5</entry>
 
 	<entry key="metadata.issuer">CN=eidas-node-metadata,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
-	<entry key="metadata.serialNumber">5C439B135211720D4F80BB2579F2019173ADCE66</entry>
+	<entry key="metadata.serialNumber">43141C084981ED07FF1478A2D29A82CE0DEB4557</entry>
 
 
 	<!-- Truststore with other countries certificates-->
