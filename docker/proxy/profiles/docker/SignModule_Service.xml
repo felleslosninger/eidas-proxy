@@ -26,7 +26,7 @@
 	<entry key="metadata.signature.algorithm">http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1</entry>
 
 	<entry key="issuer">CN=norwegian-eidasnode-proxy,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
-	<entry key="serialNumber">475755E7EA83E6201AF6F1064302018FA4B7AED5</entry>
+	<entry key="serialNumber">5A95FCAE5AD728A56919A21F39FF347266795F56</entry>
 
 	<entry key="metadata.issuer">CN=eidas-node-metadata,OU=ID-porten,O=Digitaliseringsdirektoratet,L=Leikanger,ST=Sogndal,C=NO</entry>
 	<entry key="metadata.serialNumber">5C439B135211720D4F80BB2579F2019173ADCE66</entry>
