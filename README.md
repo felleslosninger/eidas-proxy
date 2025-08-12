@@ -32,7 +32,7 @@ docker-compose up --build
 
 Test by checking if metadata-endepoint is responding: eidas-proxy:8082/ServiceMetadata
 
-
+During upgrade, be sure to update TRUSTSTORE_BASE64 is the base64 encoded nistp256-cert from the demoland found in eidaskeystore_metadata. 
 
 ### Test eidas-proxy in test/production environment
 Systest: https://proxy.eidasnode.dev/ServiceMetadata
