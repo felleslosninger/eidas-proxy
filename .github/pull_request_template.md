@@ -19,4 +19,4 @@ Kodeles:
 - [ ] Løyser saka
 - [ ] Risikovurdering ok
 - [ ] Nødvendige regresjonstester er oppdatert/oppretta/planlagt
-- [ ] Har oppdatert readme (evt digdir docs om nødvendig)
+- [ ] Har oppdatert readme
