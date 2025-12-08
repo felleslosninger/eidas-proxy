@@ -21,4 +21,13 @@
 <properties>
     <comment>Justice and Consumers Financial Stability, Financial Services and Capital Markets Union Sector Specific Attributes</comment>
 
+    <entry key="1.NameUri">http://e-justice.europa.eu/attributes/naturalperson/eJusticeNaturalPersonRole</entry>
+    <entry key="1.FriendlyName">eJusticeNaturalPersonRole</entry>
+    <entry key="1.PersonType">NaturalPerson</entry>
+    <entry key="1.Required">false</entry>
+    <entry key="1.XmlType.NamespaceUri">http://www.w3.org/2001/XMLSchema</entry>
+    <entry key="1.XmlType.LocalPart">string</entry>
+    <entry key="1.XmlType.NamespacePrefix">xs</entry>
+    <entry key="1.AttributeValueMarshaller">eu.eidas.auth.commons.attribute.impl.LiteralStringAttributeValueMarshaller</entry>
+
 </properties>
