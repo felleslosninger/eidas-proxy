@@ -14,6 +14,7 @@
 
 ## Integrate a new country
 Exchange metadata signing certificates and add theirs to `docker/proxy/profiles/<ENVIRONMENT>/keystore/otherCountriesEidasKeyStore.p12`.
+Make sure to add medatadata to whitelist in the profile's MetadataFetcher_Service.properties
 
 If encryption of communication add country ISO-code here: `docker/proxy/config/encryptionConf.xml`.
 
