@@ -5,7 +5,7 @@ WORKDIR /data
 ARG GIT_PACKAGE_TOKEN
 
 # Download our redis-lib
-ARG REDIS_LIB_VERSION=1.0.4
+ARG REDIS_LIB_VERSION=3.0.2-rc1
 RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
   https://maven.pkg.github.com/felleslosninger/eidas-redis-lib/no/idporten/eidas/eidas-redis/${REDIS_LIB_VERSION}/eidas-redis-${REDIS_LIB_VERSION}.jar
 RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
@@ -13,21 +13,19 @@ RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
 RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
   https://maven.pkg.github.com/felleslosninger/eidas-redis-lib/no/idporten/eidas/eidas-redis-specific-communication/${REDIS_LIB_VERSION}/eidas-redis-specific-communication-${REDIS_LIB_VERSION}.jar
 
-# Logstash-logback-endcoder to enable JSON logging (needs jackson). Version must be competable with Logback version in eu eIDAS parent pom.xml.
-ARG LOG_LIB_VERSION=8.0
-RUN curl -L -O https://repo1.maven.org/maven2/net/logstash/logback/logstash-logback-encoder/${LOG_LIB_VERSION}/logstash-logback-encoder-${LOG_LIB_VERSION}.jar
-ARG JACKSON_LIB_VERSION=2.15.2
-RUN curl -L -O https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/${JACKSON_LIB_VERSION}/jackson-core-${JACKSON_LIB_VERSION}.jar
-RUN curl -L -O https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/${JACKSON_LIB_VERSION}/jackson-databind-${JACKSON_LIB_VERSION}.jar
-RUN curl -L -O https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/${JACKSON_LIB_VERSION}/jackson-annotations-${JACKSON_LIB_VERSION}.jar
-
+#Download extra runtime libraries (logging, redis, netty, etc.) via Maven
+COPY docker/extra-libs-pom.xml /data/extra-libs-pom.xml
+RUN mvn package -f /data/extra-libs-pom.xml -q
 # Download & build EU-eidas software
-ARG EIDAS_NODE_VERSION=2.9.0
+ARG EIDAS_NODE_VERSION=3.0.0
 RUN git clone --depth 1 --branch eidasnode-${EIDAS_NODE_VERSION} https://ec.europa.eu/digital-building-blocks/code/scm/eid/eidasnode-pub.git
+ARG BOUNCYCASTLE_LIB_VERSION=1.81
+RUN curl -l -O https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk18on/${BOUNCYCASTLE_LIB_VERSION}/bcprov-jdk18on-${BOUNCYCASTLE_LIB_VERSION}.jar
 
 # Add our custom libs and config to EU-eidas software before build
 RUN mkdir -p eidasnode-pub/EIDAS-Node-Proxy/src/main/webapp/WEB-INF/lib && cp /data/eidas-redis-*${REDIS_LIB_VERSION}.jar eidasnode-pub/EIDAS-Node-Proxy/src/main/webapp/WEB-INF/lib/
-RUN cp /data/logstash-logback-encoder-*.jar /data/jackson-*.jar eidasnode-pub/EIDAS-Node-Proxy/src/main/webapp/WEB-INF/lib/
+RUN cp /data/target/libs/*.jar  eidasnode-pub/EIDAS-Node-Proxy/src/main/webapp/WEB-INF/lib/
+
 COPY docker/proxy/config/proxySpecificCommunicationCaches.xml eidasnode-pub/EIDAS-SpecificCommunicationDefinition/src/main/resources/
 COPY docker/proxy/logback.xml eidasnode-pub/EIDAS-Node-Proxy/src/main/resources/logback.xml
 
@@ -45,22 +43,24 @@ COPY docker/luna/Luna_min_client.tar /tmp
 RUN mkdir -p /usr/local/luna
 RUN tar xvf /tmp/Luna_min_client.tar --strip 1 -C /usr/local/luna
 
-FROM tomcat:9.0-jre17-temurin-jammy
+FROM tomcat:11.0-jre21-temurin
 
 #Fjerner passord fra logger ved oppstart
 RUN sed -i -e 's/FINE/WARNING/g' /usr/local/tomcat/conf/logging.properties
 # Fjerner default applikasjoner fra tomcat
 RUN rm -rf /usr/local/tomcat/webapps.dist
 
-COPY docker/bouncycastle/bcprov-jdk18on-1.78.1.jar /usr/local/lib/bcprov-jdk18on-1.78.1.jar
+COPY --from=builder /data/bcprov-jdk18on-1.81.jar /usr/local/lib/bcprov-jdk18on-1.81.jar
 COPY docker/java-security-providers/*java_bc.security /opt/java/openjdk/conf/security/
 RUN chmod 776 /opt/java/openjdk/conf/security/java_bc.security
 
 #HSM
-COPY --from=builder /usr/local/luna /var/usrlocal/luna
-RUN mkdir -p /var/usrlocal/luna/config/certs
-ENV ChrystokiConfigurationPath=/var/usrlocal/luna/config
-RUN cp /var/usrlocal/luna/jsp/64/libLunaAPI.so /opt/java/openjdk/lib/
+ARG ChrystokiBasePath=/var/usrlocal/luna
+ENV ChrystokiConfigurationPath=${ChrystokiBasePath}/config
+RUN mkdir -p ${ChrystokiConfigurationPath}/certs
+COPY --from=builder /usr/local/luna ${ChrystokiBasePath}
+COPY docker/luna/Chrystoki.conf ${ChrystokiConfigurationPath}
+COPY --from=builder /usr/local/luna/jsp/64/libLunaAPI.so /opt/java/openjdk/lib/
 
 #Tomcat changes
 COPY docker/proxy/tomcat-setenv.sh ${CATALINA_HOME}/bin/setenv.sh
