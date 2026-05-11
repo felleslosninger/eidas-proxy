@@ -66,4 +66,12 @@
     <!-- BC=Bouncy castle security provider, see docker/java-security-providers/java_bc.security file -->
     <entry key="logging.hash.digest.provider">BC</entry>
 
+    <entry key="insert.prefix.identifiers.country.code">true</entry>
+
+    <entry key="telemetry.whitelisted.ips">localhost</entry>
+    <entry key="service.nameid.formats">
+        urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified;
+        urn:oasis:names:tc:SAML:2.0:nameid-format:transient;
+        urn:oasis:names:tc:SAML:2.0:nameid-format:persistent;
+    </entry>
 </properties>

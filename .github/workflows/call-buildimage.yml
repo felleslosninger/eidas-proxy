@@ -14,8 +14,12 @@ on:
 jobs:
   build-publish-image:
     uses: felleslosninger/github-workflows/.github/workflows/ci-build-publish-image.yml@main
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
     with:
-      java-version: 17
+      java-version: 21
       image-name: eidas-proxy
       application-type: docker
       add-git-package-token: true
@@ -24,6 +28,8 @@ jobs:
   call-update-image:
     uses: felleslosninger/github-workflows/.github/workflows/ci-call-update-image.yml@main
     needs: [build-publish-image]
+    permissions:
+      pull-requests: read
     with:
       application-name: eidas-proxy
       deployment-environment: systest
