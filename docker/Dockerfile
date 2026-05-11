@@ -13,7 +13,7 @@ RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
 RUN curl -H "Authorization: token ${GIT_PACKAGE_TOKEN}" -L -O \
   https://maven.pkg.github.com/felleslosninger/eidas-redis-lib/no/idporten/eidas/eidas-redis-specific-communication/${REDIS_LIB_VERSION}/eidas-redis-specific-communication-${REDIS_LIB_VERSION}.jar
 
- Download extra runtime libraries (logging, redis, netty, etc.) via Maven
+#Download extra runtime libraries (logging, redis, netty, etc.) via Maven
 COPY docker/extra-libs-pom.xml /data/extra-libs-pom.xml
 RUN mvn package -f /data/extra-libs-pom.xml -q
 # Download & build EU-eidas software
