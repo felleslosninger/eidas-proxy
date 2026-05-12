@@ -1,0 +1,28 @@
+name: Pull request
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - edited
+    branches:
+      - main
+    paths-ignore:
+      - 'docker-compose.yaml'
+      - '*.md'
+      - 'LICENSE'
+
+jobs:
+  pull-request-checks:
+    uses: felleslosninger/github-workflows/.github/workflows/ci-pr-checks.yml@main
+    permissions:
+      contents: write
+      pull-requests: write
+    with:
+      application-type: docker
+      pull-request-title: ${{ github.event.pull_request.title }}
+      pull-request-allowed-prefixes: "Bump,ID-"
+      java-version: 21
+    secrets: inherit
