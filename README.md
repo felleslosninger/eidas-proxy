@@ -40,3 +40,4 @@ Systest: https://proxy.eidasnode.dev/ServiceMetadata
 Test: https://proxy.test.eidasnode.no/ServiceMetadata
 
 Prod: https://proxy.eidasnode.no/ServiceMetadata
+
